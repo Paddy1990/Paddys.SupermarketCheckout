@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Offers.Models;
+using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 
 namespace Paddys.SupermarketCheckout.Services.Data
 {
     public class SupermarketDatabase : ISupermarketDatabase
     {
-        public int DeleteOffer(Offer product)
+        public int DeleteOffer(OfferEntity product)
         {
             throw new NotImplementedException();
         }
 
-        public int DeleteProduct(Product product)
+        public int DeleteProduct(ProductEntity product)
         {
             throw new NotImplementedException();
         }
@@ -23,7 +25,7 @@ namespace Paddys.SupermarketCheckout.Services.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Offer> GetOffers()
+        public IEnumerable<OfferEntity> GetOffers()
         {
             throw new NotImplementedException();
         }
@@ -33,32 +35,22 @@ namespace Paddys.SupermarketCheckout.Services.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<ProductEntity> GetProducts()
         {
             throw new NotImplementedException();
         }
 
-        public Product GetUser(int id)
+        public int InsertProduct(ProductEntity product)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetUsers()
+        public int UpdateOffer(OfferEntity product)
         {
             throw new NotImplementedException();
         }
 
-        public int InsertProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateOffer(Offer product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateProduct(Product product)
+        public int UpdateProduct(ProductEntity product)
         {
             throw new NotImplementedException();
         }

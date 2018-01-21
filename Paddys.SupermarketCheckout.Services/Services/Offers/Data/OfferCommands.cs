@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Paddys.SupermarketCheckout.Services.Services.Products.Data
+namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
 {
-    public class ProductCommands : IProductCommands
+    public class OfferCommands : IOfferCommands
     {
         private readonly ISupermarketDatabase _database;
 
-        public ProductCommands(ISupermarketDatabase database)
+        public OfferCommands(ISupermarketDatabase database)
         {
             _database = database;
         }

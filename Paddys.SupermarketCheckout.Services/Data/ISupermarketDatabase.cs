@@ -1,4 +1,5 @@
-﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Models;
+﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
+using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,19 @@ namespace Paddys.SupermarketCheckout.Services.Data
 {
     public interface ISupermarketDatabase
     {
-        Product GetUser(int id);
-        IEnumerable<Product> GetUsers();
+        //User GetUser(int id);
+        //IEnumerable<User> GetUsers();
 
         Product GetProduct(int id);
-        IEnumerable<Product> GetProducts();
-        int UpdateProduct(Product product);
-        int InsertProduct(Product product);
-        int DeleteProduct(Product product);
+        IEnumerable<ProductEntity> GetProducts();
+        int UpdateProduct(ProductEntity product);
+        int InsertProduct(ProductEntity product);
+        int DeleteProduct(ProductEntity product);
 
         Product GetOffer(int id);
-        IEnumerable<Offer> GetOffers();
-        int UpdateOffer(Offer product);
-        int DeleteOffer(Offer product);
+        IEnumerable<OfferEntity> GetOffers();
+        int UpdateOffer(OfferEntity product);
+        int DeleteOffer(OfferEntity product);
 
     }
 }

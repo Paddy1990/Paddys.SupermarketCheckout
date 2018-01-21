@@ -2,6 +2,7 @@
 using Paddys.SupermarketCheckout.Services.Data;
 using Paddys.SupermarketCheckout.Services.Services.Products;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data;
+using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 using Shouldly;
 using System;
@@ -57,31 +58,28 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Products
             results.Count.ShouldBe(productCount);
         }
 
-        private List<Product> ArrangeProductsList()
+        private List<ProductEntity> ArrangeProductsList()
         {
-            return new List<Product>
+            return new List<ProductEntity>
             {
-                new Product 
+                new ProductEntity
                 {
                     Id = 1,
                     Sku = "A01",
                     Name = "Apple",
                     Description = "Apple",
-                    CategoryId = 1,
-                    CategoryName = "Fruit And Veg",
                     Price = 0.50M
                 },
-                new Product
+                new ProductEntity
                 {
                     Id = 2,
                     Sku = "B15",
                     Name = "Biscuits",
                     Description = "Biscuits",
-                    CategoryId = 2,
-                    CategoryName = "Bakery",
                     Price = 2.50M
                 }
             };
         }
+
     }
 }
