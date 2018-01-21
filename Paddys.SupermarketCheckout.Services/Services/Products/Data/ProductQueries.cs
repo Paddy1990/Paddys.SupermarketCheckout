@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using Paddys.SupermarketCheckout.Services.Data;
+using System.Linq;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Products.Data
 {
@@ -15,9 +15,20 @@ namespace Paddys.SupermarketCheckout.Services.Services.Products.Data
             _database = database;
         }
 
+        public ProductEntity GetProduct(int id)
+        {
+            return _database.GetProduct(id);
+        }
+
         public IEnumerable<ProductEntity> GetProducts()
         {
-            throw new NotImplementedException();
+            return _database.GetProducts();
+        }
+
+        public IEnumerable<ProductEntity> GetProducts(IEnumerable<int> ids)
+        {
+            var products = _database.GetProducts();
+            return products.Where(x => ids.Any(y => y == x.Id));
         }
     }
 }

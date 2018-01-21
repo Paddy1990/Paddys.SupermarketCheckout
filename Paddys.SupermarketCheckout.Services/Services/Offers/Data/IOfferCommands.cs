@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
 {
     public interface IOfferCommands
     {
+        void InsertOffer(OfferEntity offerEntity);
+        void UpdateOffer(OfferEntity offerEntity);
+        void DeleteOffer(int id);
     }
 }

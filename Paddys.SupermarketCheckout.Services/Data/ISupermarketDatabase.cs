@@ -1,9 +1,6 @@
 ﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
-using Paddys.SupermarketCheckout.Services.Services.Products.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Paddys.SupermarketCheckout.Services.Data
 {
@@ -12,16 +9,17 @@ namespace Paddys.SupermarketCheckout.Services.Data
         //User GetUser(int id);
         //IEnumerable<User> GetUsers();
 
-        Product GetProduct(int id);
+        ProductEntity GetProduct(int id);
         IEnumerable<ProductEntity> GetProducts();
-        int UpdateProduct(ProductEntity product);
-        int InsertProduct(ProductEntity product);
-        int DeleteProduct(ProductEntity product);
+        void InsertProduct(ProductEntity productEntity);
+        void UpdateProduct(ProductEntity productEntity);
+        void DeleteProduct(int id);
 
-        Product GetOffer(int id);
+        OfferEntity GetOffer(int id);
         IEnumerable<OfferEntity> GetOffers();
-        int UpdateOffer(OfferEntity product);
-        int DeleteOffer(OfferEntity product);
+        void InsertOffer(OfferEntity offerEntity);
+        void UpdateOffer(OfferEntity offerEntity);
+        void DeleteOffer(int id);
 
     }
 }

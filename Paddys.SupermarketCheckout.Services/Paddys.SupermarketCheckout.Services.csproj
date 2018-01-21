@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Products\Assembler\" />
+    <Folder Include="Services\Products\Assemblers\" />
   </ItemGroup>
 
 </Project>

@@ -1,58 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
-using Paddys.SupermarketCheckout.Services.Services.Offers.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
-using Paddys.SupermarketCheckout.Services.Services.Products.Models;
+using System.Linq;
 
 namespace Paddys.SupermarketCheckout.Services.Data
 {
     public class SupermarketDatabase : ISupermarketDatabase
     {
-        public int DeleteOffer(OfferEntity product)
-        {
-            throw new NotImplementedException();
-        }
+        public IList<ProductEntity> Products { get; set; }
+        public IList<OfferEntity> Offers { get; set; }
 
-        public int DeleteProduct(ProductEntity product)
+        public ProductEntity GetProduct(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Product GetOffer(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<OfferEntity> GetOffers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product GetProduct(int id)
-        {
-            throw new NotImplementedException();
+            return Products.FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<ProductEntity> GetProducts()
         {
-            throw new NotImplementedException();
+            return Products;
         }
 
-        public int InsertProduct(ProductEntity product)
+        public void InsertProduct(ProductEntity productEntity)
         {
-            throw new NotImplementedException();
+            var product = Products.FirstOrDefault(x => x.Id == productEntity.Id);
+            if (product != null)
+                return;
+
+            Products.Add(productEntity);
         }
 
-        public int UpdateOffer(OfferEntity product)
+        public void UpdateProduct(ProductEntity productEntity)
         {
-            throw new NotImplementedException();
+            var product = Products.FirstOrDefault(x => x.Id == productEntity.Id);
+            if (product == null)
+                return;
+
+            Products.Remove(product);
+            Products.Add(productEntity);
         }
 
-        public int UpdateProduct(ProductEntity product)
+        public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var product = Products.FirstOrDefault(x => x.Id == id);
+            if (product == null)
+                return;
+
+            Products.Remove(product);
         }
+
+        public OfferEntity GetOffer(int id)
+        {
+            return Offers.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<OfferEntity> GetOffers()
+        {
+            return Offers;
+        }
+
+        public void InsertOffer(OfferEntity offerEntity)
+        {
+            var offer = Offers.FirstOrDefault(x => x.Id == offerEntity.Id);
+            if (offer != null)
+                return;
+
+            Offers.Add(offerEntity);
+        }
+
+        public void UpdateOffer(OfferEntity offerEntity)
+        {
+            var offer = Offers.FirstOrDefault(x => x.Id == offerEntity.Id);
+            if (offer == null)
+                return;
+
+            Offers.Remove(offer);
+            Offers.Add(offerEntity);
+        }
+
+        public void DeleteOffer(int id)
+        {
+            var offer = Offers.FirstOrDefault(x => x.Id == id);
+            if (offer == null)
+                return;
+            
+            Offers.Remove(offer);
+        }
+
     }
 }
