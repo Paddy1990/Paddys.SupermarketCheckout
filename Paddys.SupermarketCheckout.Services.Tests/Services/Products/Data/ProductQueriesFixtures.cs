@@ -1,4 +1,5 @@
 ﻿using Moq;
+using Paddys.SupermarketCheckout.Services.Data;
 using Paddys.SupermarketCheckout.Services.Services.Products;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
@@ -11,17 +12,17 @@ using Xunit;
 
 namespace Paddys.SupermarketCheckout.Services.Tests.Services.Products
 {
-    public class ProductServiceFixtures
+    public class ProductQueriesFixtures
     {
-        private readonly Mock<IProductQueries> _productQueries;
+        private readonly Mock<ISupermarketDatabase> _database;
 
-        private readonly ProductService _productService;
+        private readonly ProductQueries _productQueries;
 
-        public ProductServiceFixtures()
+        public ProductQueriesFixtures()
         {
-            _productQueries = new Mock<IProductQueries>();
+            _database = new Mock<ISupermarketDatabase>();
 
-            _productService = new ProductService(_productQueries.Object);
+            _productQueries = new ProductQueries(_database.Object);
         }
 
         [Fact]
@@ -31,10 +32,10 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Products
             var products = ArrangeProductsList();
             var productCount = products.Count;
 
-            _productQueries.Setup(x => x.GetProducts()).Returns(products);
+            _database.Setup(x => x.GetProducts()).Returns(products);
 
             //Act
-            var results = _productService.GetProducts().ToList();
+            var results = _productQueries.GetProducts().ToList();
                     
             //Assert
             results.ShouldBe(products);
@@ -47,10 +48,10 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Products
             var products = ArrangeProductsList();
             var productCount = products.Count;
 
-            _productQueries.Setup(x => x.GetProducts()).Returns(products);
+            _database.Setup(x => x.GetProducts()).Returns(products);
 
             //Act
-            var results = _productService.GetProducts().ToList();
+            var results = _productQueries.GetProducts().ToList();
 
             //Assert
             results.Count.ShouldBe(productCount);
