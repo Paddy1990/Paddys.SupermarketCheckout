@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Offers
 {
-    class OfferService
+    public class OfferService : IOfferService
     {
     }
 }

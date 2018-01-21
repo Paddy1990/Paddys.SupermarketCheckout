@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Products
 {
-    interface IProductService
+    public interface IProductsService
     {
     }
 }
