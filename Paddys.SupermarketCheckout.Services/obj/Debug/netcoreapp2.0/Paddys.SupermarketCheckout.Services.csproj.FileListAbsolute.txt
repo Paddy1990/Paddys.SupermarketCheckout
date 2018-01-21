@@ -1,9 +1,0 @@
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\bin\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.deps.json
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\bin\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.dll
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\bin\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.pdb
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.csprojResolveAssemblyReference.cache
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.csproj.CoreCompileInputs.cache
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.AssemblyInfoInputs.cache
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.AssemblyInfo.cs
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.dll
-C:\Dev\Projects\Paddys.SupermarketCheckout\Paddys.SupermarketCheckout.Services\obj\Debug\netcoreapp2.0\Paddys.SupermarketCheckout.Services.pdb
