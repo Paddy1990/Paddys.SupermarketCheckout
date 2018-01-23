@@ -7,6 +7,7 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers
 {
     public interface IOfferService
     {
-        IList<OfferEntity> GetOpenOffers(int productId);
+        IList<OfferEntity> GetOffers();
+        IList<OfferEntity> GetOpenOffers(IEnumerable<int> ids);
     }
 }

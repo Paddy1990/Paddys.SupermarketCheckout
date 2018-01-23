@@ -2,6 +2,8 @@
 using Paddys.SupermarketCheckout.Client.Constants;
 using Paddys.SupermarketCheckout.Services.Services.Baskets;
 using Paddys.SupermarketCheckout.Services.Services.Baskets.Models;
+using Paddys.SupermarketCheckout.Services.Services.Offers;
+using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 using System;
@@ -13,14 +15,19 @@ namespace Paddys.SupermarketCheckout.Client.App
     public class SupermarketCheckoutApp : ISupermarketCheckoutApp
     {
         private IList<Product> Products { get; set; }
+        private IList<OfferEntity> Offers { get; set; }
+        private Basket Basket { get; set; }
 
         private readonly IProductService _productService;
+        private readonly IOfferService _offerService;
         private readonly IBasketService _basketService;
 
-        public SupermarketCheckoutApp(IProductService productService, IBasketService basketService)
+        public SupermarketCheckoutApp(IProductService productService, IOfferService offerService, IBasketService basketService)
         {
             _productService = productService;
+            _offerService = offerService;
             _basketService = basketService;
+
         }
 
         public void Run()
@@ -32,8 +39,10 @@ namespace Paddys.SupermarketCheckout.Client.App
             //Step 2. Capture the user input and validate against user keys.
             var userInput = CaptureUserInput();
 
-            //Step 3. Get the products lists.
+            //Step 3. Get the products and offers.
             Products = _productService.GetProducts().ToList();
+            Offers = _offerService.GetOffers().ToList();
+            Basket = new Basket();
 
             if (userInput.Key == InputKeys.AdminUserKey)
                 RunAdministratorApp();
@@ -43,7 +52,6 @@ namespace Paddys.SupermarketCheckout.Client.App
 
         private void RunCustomerApp()
         {
-            var basket = new Basket();
             if (Products.Count < 1)
             {
                 Console.WriteLine();
@@ -65,7 +73,7 @@ namespace Paddys.SupermarketCheckout.Client.App
             //Step 4. Capture the Quantity
             var productQuantity = CaptureProductQuantityInput(product.Name);
             basketItem.Quantity = productQuantity;
-            basket.Items.Add(basketItem);
+            Basket.Items.Add(basketItem);
 
             //Step 5. Display The Basket Options
             DisplayBasketOptionsText();
@@ -76,12 +84,11 @@ namespace Paddys.SupermarketCheckout.Client.App
             //Step 7. Loop if we want to add another product
             if (basketOption.Key == InputKeys.AnotherProductKey)
                 RunCustomerApp();
-
-            if (basketOption.Key != InputKeys.GoToBasketKey)
+            else if (basketOption.Key != InputKeys.GoToBasketKey)
                 throw new Exception("An error has occured - the basket option input is incorrect");
 
             //Step 8. Go and get the basket total from the service.
-            var basketSummary = _basketService.GetBasketSummary(basket);
+            var basketSummary = _basketService.GetBasketSummary(Basket);
             if (basketSummary.Items.Count < 1)
             {
                 Console.WriteLine();
@@ -99,6 +106,8 @@ namespace Paddys.SupermarketCheckout.Client.App
             {
                 Console.WriteLine();
                 Console.WriteLine("Could not find any products!");
+                Console.WriteLine();
+                return;
             }
 
             //Step 1. Display the products list.
@@ -109,27 +118,32 @@ namespace Paddys.SupermarketCheckout.Client.App
             var product = Products.FirstOrDefault(x => x.Sku.ToUpper() == productInput.ToUpper());
             var basketItem = new BasketItem { Product = product };
 
-            //Step 3. Display The Administrator Options
+            if (Offers.Count < 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Could not find any offers!");
+                Console.WriteLine();
+            }
+
+            //Step 3. Display Offer Table
+            DisplayOfferTable();
+
+            //Step 5. Display The Administrator Options
             DisplayAdminOptionsText();
 
-            //If edit offer
-            //DisplayOffersTable();
             //Choose Offer from list.
-            //Display "Would you like to edit the {property}" Text
-                //CaptureOfferName();
-                //CaptureOfferDescription();
-                //CaptureOfferQuantity();
-                //CaptureOfferPrice();
-                //CaptureOfferStartDate();
-                //CaptureOfferEndDate();
-            //else if add offer
-                //CaptureOfferDetails();
-                //CaptureOfferName();
-                //CaptureOfferDescription();
-                //CaptureOfferQuantity();
-                //CaptureOfferPrice();
-                //CaptureOfferStartDate();
-                //CaptureOfferEndDate();
+            var adminOption = CaptureAdminOptionsInput();
+
+            if (adminOption.Key == InputKeys.AdminAddOfferKey)
+            {
+                //Add new offer
+            }
+
+            if (adminOption.Key == InputKeys.AdminEditOfferKey)
+            {
+                //Edit existing offer
+            }
+            
         }
 
         private void DisplayAdminOptionsText()
@@ -137,19 +151,20 @@ namespace Paddys.SupermarketCheckout.Client.App
             Console.WriteLine("Please choose an option:");
 
             Console.WriteLine("[A] Add Offer");
-            Console.WriteLine("[E] Edit Offer");
+            //if (Offers.Count > 0)
+            //    Console.WriteLine("[E] Edit Offer");
         }
 
         private ConsoleKeyInfo CaptureAdminOptionsInput()
         {
             var input = Console.ReadKey();
-            if (!BasketOptionValid(input))
+            if (!AdminOptionsValid(input))
             {
                 Console.WriteLine();
                 Console.WriteLine("Input incorrect, Please input an option using their key.");
 
-                DisplayBasketOptionsText();
-                CaptureUserInput();
+                DisplayAdminOptionsText();
+                return CaptureAdminOptionsInput();
             }
 
             return input;
@@ -161,6 +176,62 @@ namespace Paddys.SupermarketCheckout.Client.App
                 return false;
 
             return true;
+        }
+
+
+        private void DisplayOfferTable()
+        {
+            if (Offers.Count < 1)
+                return;
+
+            Console.WriteLine();
+
+            var table = new ConsoleTable("Id", "Name", "Price", "Quantity", "Start Date", "End Date");
+            foreach (var offer in Offers)
+            {
+                table.AddRow(offer.Id, offer.Name, offer.Price, offer.Quantity, offer.StartDate, offer.EndDate);
+            }
+
+            table.Write();
+
+            Console.WriteLine();
+            Console.WriteLine("Please choose an offer by inputting their SKU:");
+        }
+
+        private string CaptureOfferInput()
+        {
+            string input = Console.ReadLine();
+            var inputValid = OfferInputValid(input);
+            if (!inputValid)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Could not find an offer with the Id {input}, please choose another!");
+
+                DisplayOfferTable();
+                return CaptureOfferInput();
+            }
+
+            return input;
+        }
+
+        private bool OfferInputValid(string input)
+        {
+            if (!int.TryParse(input, out int value))
+                return false;
+
+            var selectedOffer = Offers.FirstOrDefault(x => x.Id == value);
+            if (selectedOffer == null)
+                return false;
+
+            return true;
+        }
+
+        
+        private void CaptureOfferDetails()
+        {
+            var offer = new OfferEntity();
+            //DisplayEditOfferPropertyText("Name");
+
         }
 
 
@@ -186,7 +257,7 @@ namespace Paddys.SupermarketCheckout.Client.App
                 Console.WriteLine("Could not find a user with the key, please choose another!");
 
                 DisplayChooseUserText();
-                CaptureUserInput();
+                return CaptureUserInput();
             }
             
             return input;
@@ -215,7 +286,7 @@ namespace Paddys.SupermarketCheckout.Client.App
                 var offers = product.Offers.OrderBy(x => x.StartDate).ToList();
                 var offersText = string.Empty;
                 foreach (var offer in offers)
-                    offersText += offer.Name + Environment.NewLine;
+                    offersText += offer.Name + " | " ;
 
                 table.AddRow(product.Sku, $"{product.Name} - {product.Description}", product.Price, offersText);
             }
@@ -236,7 +307,7 @@ namespace Paddys.SupermarketCheckout.Client.App
                 Console.WriteLine($"Could not find a product with the SKU {input}, please choose another!");
 
                 DisplayProductTable();
-                CaptureProductInput();
+                return CaptureProductInput();
             }
             
             return input;
@@ -267,7 +338,7 @@ namespace Paddys.SupermarketCheckout.Client.App
                 Console.WriteLine("Input incorrect, Please input an integer.");
 
                 DisplayChooseQuantityText(productName);
-                CaptureProductInput();
+                return CaptureProductQuantityInput(productName);
             }
 
             return int.Parse(input);
@@ -299,7 +370,7 @@ namespace Paddys.SupermarketCheckout.Client.App
                 Console.WriteLine("Input incorrect, Please input an option using their key.");
 
                 DisplayBasketOptionsText();
-                CaptureUserInput();
+                return CaptureBasketOptionsInput();
             }
             
             return input;
@@ -328,6 +399,7 @@ namespace Paddys.SupermarketCheckout.Client.App
             table.AddRow(string.Empty, string.Empty, string.Empty, string.Empty, basket.Total);
             table.Write();
         }
-        
+
+
     }
 }

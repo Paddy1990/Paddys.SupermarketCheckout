@@ -31,8 +31,8 @@ namespace Paddys.SupermarketCheckout.Services.Services.Baskets
             {
                 var itemPrice = item.Product.Price * item.Quantity;
 
-                var offers = _offerQueries.GetOpenOffers(item.Product.Id).ToList();
-                var newPrice = CalculateOffersDiscount(offers, itemPrice, item.Quantity);
+                var offers = _offerQueries.GetOpenOffers(item.Product.Offers.Select(x => x.Id)).ToList();
+                var newPrice = CalculateOffersDiscount(offers, item.Product.Price, item.Quantity, itemPrice);
 
                 item.Total = newPrice;
                 total += item.Total;
@@ -40,15 +40,23 @@ namespace Paddys.SupermarketCheckout.Services.Services.Baskets
             return total;
         }
 
-        private decimal CalculateOffersDiscount(IList<OfferEntity> offers, decimal originalPrice, int quantity)
+        private decimal CalculateOffersDiscount(IList<OfferEntity> offers, decimal itemPrice, int quantity, decimal originalPrice)
         {
             var newPrice = originalPrice;
             foreach (var offer in offers)
             {
-                if (offer.Quantity != quantity)
+                var removedPrice = 0m;
+                if (quantity < offer.Quantity)
                     continue;
+                
+                if (quantity == offer.Quantity)
+                    removedPrice = originalPrice - offer.Price;
 
-                newPrice -= originalPrice - offer.Price;
+                if (quantity > offer.Quantity)
+                    removedPrice = itemPrice * offer.Quantity;
+
+                newPrice -= removedPrice;
+
             }
             return newPrice;
         }

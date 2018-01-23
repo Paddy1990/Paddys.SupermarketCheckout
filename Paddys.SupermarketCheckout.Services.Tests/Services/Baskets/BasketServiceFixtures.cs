@@ -7,6 +7,7 @@ using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -62,7 +63,7 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Baskets
             //Arrange
             var basket = ArrangeSingleBasketWithOffers();
             
-            _offerQueries.Setup(x => x.GetOpenOffers(basket.Items[0].Product.Id))
+            _offerQueries.Setup(x => x.GetOpenOffers(basket.Items[0].Product.Offers.Select(y => y.Id)))
                 .Returns(new List<OfferEntity> { ArrangeSingleOffer() });
 
             //Act
@@ -80,7 +81,7 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Baskets
             //Arrange
             var basket = ArrangeMultiBasketWithOffers();
 
-            _offerQueries.Setup(x => x.GetOpenOffers(basket.Items[0].Product.Id))
+            _offerQueries.Setup(x => x.GetOpenOffers(basket.Items[0].Product.Offers.Select(y => y.Id)))
                 .Returns(new List<OfferEntity> { ArrangeSingleOffer() });
 
             //Act

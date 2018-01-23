@@ -15,9 +15,14 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers
             _offerQueries = offerQueries;
         }
 
-        public IList<OfferEntity> GetOpenOffers(int productId)
+        public IList<OfferEntity> GetOffers()
         {
-            return _offerQueries.GetOpenOffers(productId).ToList();
+            return _offerQueries.GetOffers().ToList();
+        }
+
+        public IList<OfferEntity> GetOpenOffers(IEnumerable<int> ids)
+        {
+            return _offerQueries.GetOpenOffers(ids).ToList();
         }
     }
 }

@@ -31,12 +31,12 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
             return offers.Where(x => ids.Any(y => y == x.Id));
         }
 
-        public IEnumerable<OfferEntity> GetOpenOffers(int productId)
+        public IEnumerable<OfferEntity> GetOpenOffers(IEnumerable<int> ids)
         {
             var today = DateTime.UtcNow.Date;
 
-            var offers = GetOffers(new List<int> { productId });
-            return offers.Where(x => x.StartDate.Date >= today && x.EndDate <= today);
+            var offers = GetOffers(ids);
+            return offers.Where(x => x.StartDate.Date <= today && x.EndDate >= today);
         }
 
     }

@@ -7,8 +7,8 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
     {
         OfferEntity GetOffer(int id);
         IEnumerable<OfferEntity> GetOffers();
-        IEnumerable<OfferEntity> GetOffers(IEnumerable<int> productIds);
+        IEnumerable<OfferEntity> GetOffers(IEnumerable<int> offerIds);
 
-        IEnumerable<OfferEntity> GetOpenOffers(int productId);
+        IEnumerable<OfferEntity> GetOpenOffers(IEnumerable<int> offerIds);
     }
 }

@@ -2,6 +2,7 @@
 using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using System.Linq;
+using System;
 
 namespace Paddys.SupermarketCheckout.Services.Data
 {
@@ -16,6 +17,7 @@ namespace Paddys.SupermarketCheckout.Services.Data
             AddProducts();
 
             Offers = new List<OfferEntity>();
+            AddOffers();
         }
 
         public ProductEntity GetProduct(int id)
@@ -96,7 +98,19 @@ namespace Paddys.SupermarketCheckout.Services.Data
 
         private void AddProducts()
         {
-            InsertProduct(new ProductEntity { Id = 1, Name = "Apple", Description = "Fruit & Veg", Price = 0.50m, Sku = "A15" });
+            InsertProduct(new ProductEntity { Id = 1, Name = "Apple", Description = "Fruit & Veg", Price = 0.50m, Sku = "A15", OfferIds = new List<int> { 1 } });
+            InsertProduct(new ProductEntity { Id = 2, Name = "Biscuits", Description = "Biscuits & Cerial", Price = 1.50m, Sku = "B24", OfferIds = new List<int> { 2 } });
+            InsertProduct(new ProductEntity { Id = 3, Name = "Chicken", Description = "Meat", Price = 6m, Sku = "C17", OfferIds = new List<int> { 3 } });
+            InsertProduct(new ProductEntity { Id = 4, Name = "Yogurt", Description = "Yogurts", Price = 3.75m, Sku = "Y56", OfferIds = new List<int> { 4 } });
+        }
+
+        private void AddOffers()
+        {
+            InsertOffer(new OfferEntity { Id = 1, Name = "3 Apples for £1.00", Price = 1.00m, Quantity = 3, StartDate = new DateTime(2018, 01, 21).Date, EndDate = new DateTime(2018, 01, 21).AddDays(7).Date });
+            InsertOffer(new OfferEntity { Id = 2, Name = "5 Biscuits for £5.99", Price = 5.99m, Quantity = 5, StartDate = new DateTime(2018, 01, 21).Date, EndDate = new DateTime(2018, 01, 21).AddDays(7).Date });
+            InsertOffer(new OfferEntity { Id = 3, Name = "3 Chickens for £15", Price = 15.00m, Quantity = 3, StartDate = new DateTime(2018, 01, 21).Date, EndDate = new DateTime(2018, 01, 21).AddDays(7).Date });
+            InsertOffer(new OfferEntity { Id = 4, Name = "2 Yogurts for £5.99", Price = 5.99m, Quantity = 2, StartDate = new DateTime(2018, 01, 28).Date, EndDate = new DateTime(2018, 01, 21).AddDays(14).Date });
+
         }
 
     }
