@@ -4,8 +4,8 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
 {
     public interface IOfferCommands
     {
-        void InsertOffer(OfferEntity offerEntity);
-        void UpdateOffer(OfferEntity offerEntity);
+        void InsertOffer(OfferEntity offer);
+        void UpdateOffer(OfferEntity offer);
         void DeleteOffer(int id);
     }
 }

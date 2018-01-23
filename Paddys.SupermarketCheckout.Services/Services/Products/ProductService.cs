@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Paddys.SupermarketCheckout.Services.Services.Products.Models;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data;
 using Paddys.SupermarketCheckout.Services.Services.Offers.Data;
 using System.Linq;
 using Paddys.SupermarketCheckout.Services.Services.Products.Data.Models;
 using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
-using Paddys.SupermarketCheckout.Services.Services.Offers.Models;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Products
 {
@@ -58,21 +55,21 @@ namespace Paddys.SupermarketCheckout.Services.Services.Products
             return model;
         }
         
-        public IEnumerable<Offer> MapProductOffers(ProductEntity productEntity, IList<OfferEntity> offerEntities)
+        public IList<OfferEntity> MapProductOffers(ProductEntity productEntity, IList<OfferEntity> offerEntities)
         {
-            var model = new List<Offer>();
+            var model = new List<OfferEntity>();
             if (offerEntities == null || offerEntities.Count < 0)
                 return model;
 
             var productOffers = offerEntities.Where(x => productEntity.OfferIds.Any(y => y == x.Id));
             foreach (var offer in productOffers)
             {
-                model.Add(new Offer
+                model.Add(new OfferEntity
                 {
                     Id = offer.Id,
                     Name = offer.Name,
                     Description = offer.Description,
-                    Count = offer.Count,
+                    Quantity = offer.Quantity,
                     Price = offer.Price
                 });
             }

@@ -1,4 +1,4 @@
-﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Models;
+﻿using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,11 +12,11 @@ namespace Paddys.SupermarketCheckout.Services.Services.Products.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public IEnumerable<Offer> Offers { get; set; }
+        public IList<OfferEntity> Offers { get; set; }
 
         public Product()
         {
-            Offers = new List<Offer>();
+            Offers = new List<OfferEntity>();
         }
     }
 }

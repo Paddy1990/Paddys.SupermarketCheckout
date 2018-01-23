@@ -30,5 +30,14 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
             var offers = _database.GetOffers();
             return offers.Where(x => ids.Any(y => y == x.Id));
         }
+
+        public IEnumerable<OfferEntity> GetOpenOffers(int productId)
+        {
+            var today = DateTime.UtcNow.Date;
+
+            var offers = GetOffers(new List<int> { productId });
+            return offers.Where(x => x.StartDate.Date >= today && x.EndDate <= today);
+        }
+
     }
 }

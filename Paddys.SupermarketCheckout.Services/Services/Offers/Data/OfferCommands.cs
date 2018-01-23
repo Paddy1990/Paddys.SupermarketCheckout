@@ -1,6 +1,6 @@
 ﻿using Paddys.SupermarketCheckout.Services.Data;
-using System;
 using Paddys.SupermarketCheckout.Services.Services.Offers.Data.Models;
+using System;
 
 namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
 {
@@ -18,14 +18,14 @@ namespace Paddys.SupermarketCheckout.Services.Services.Offers.Data
             _database.DeleteOffer(id);
         }
 
-        public void InsertOffer(OfferEntity offerEntity)
+        public void InsertOffer(OfferEntity offer)
         {
-            _database.InsertOffer(offerEntity);
+            _database.InsertOffer(offer);
         }
 
-        public void UpdateOffer(OfferEntity offerEntity)
+        public void UpdateOffer(OfferEntity offer)
         {
-            _database.UpdateOffer(offerEntity);
+            _database.UpdateOffer(offer);
         }
     }
 }

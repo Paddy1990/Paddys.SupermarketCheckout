@@ -7,8 +7,16 @@ namespace Paddys.SupermarketCheckout.Services.Data
 {
     public class SupermarketDatabase : ISupermarketDatabase
     {
-        public IList<ProductEntity> Products { get; set; }
-        public IList<OfferEntity> Offers { get; set; }
+        private IList<ProductEntity> Products { get; set; }
+        private IList<OfferEntity> Offers { get; set; }
+
+        public SupermarketDatabase()
+        {
+            Products = new List<ProductEntity>();
+            AddProducts();
+
+            Offers = new List<OfferEntity>();
+        }
 
         public ProductEntity GetProduct(int id)
         {
@@ -84,6 +92,11 @@ namespace Paddys.SupermarketCheckout.Services.Data
                 return;
             
             Offers.Remove(offer);
+        }
+
+        private void AddProducts()
+        {
+            InsertProduct(new ProductEntity { Id = 1, Name = "Apple", Description = "Fruit & Veg", Price = 0.50m, Sku = "A15" });
         }
 
     }

@@ -144,7 +144,7 @@ namespace Paddys.SupermarketCheckout.Services.Tests.Services.Products
                         Id = offerId,
                         Name = string.Format("{0} - Buy 3 for 2!", product.Name),
                         Description = string.Format("Buy 3 for 2 on {0} products!", product.Name),
-                        Count = 3,
+                        Quantity = 3,
                         Price = (product.Price * 3) - product.Price // buy 3 for 2
                     });
 
