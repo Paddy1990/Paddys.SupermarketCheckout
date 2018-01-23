@@ -12,10 +12,8 @@ namespace Paddys.SupermarketCheckout.Client.App
 {
     public class SupermarketCheckoutApp : ISupermarketCheckoutApp
     {
-        private const string WelcomeText = "Welcome To Paddy's Supermarket.";
-        private const string ChooseAUserText = "Welcome To Paddy's Supermarket.";
-
         private IList<Product> Products { get; set; }
+
         private readonly IProductService _productService;
         private readonly IBasketService _basketService;
 
@@ -117,7 +115,7 @@ namespace Paddys.SupermarketCheckout.Client.App
             //If edit offer
             //DisplayOffersTable();
             //Choose Offer from list.
-            //Dislay Would you like to edit the property Text
+            //Display "Would you like to edit the {property}" Text
                 //CaptureOfferName();
                 //CaptureOfferDescription();
                 //CaptureOfferQuantity();

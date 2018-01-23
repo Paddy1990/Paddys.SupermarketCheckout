@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paddys.SupermarketCheckout.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paddys.SupermarketCheckout.Services.Tests", "Paddys.SupermarketCheckout.Services.Tests\Paddys.SupermarketCheckout.Services.Tests.csproj", "{1B2D17A7-5A25-49C6-B508-2C21BA105637}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paddys.SupermarketCheckout.Client.Tests", "Paddys.SupermarketCheckout.Client.Tests\Paddys.SupermarketCheckout.Client.Tests.csproj", "{051EB018-F944-47C7-AB1E-4265C187373C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,17 +29,12 @@ Global
 		{1B2D17A7-5A25-49C6-B508-2C21BA105637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B2D17A7-5A25-49C6-B508-2C21BA105637}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B2D17A7-5A25-49C6-B508-2C21BA105637}.Release|Any CPU.Build.0 = Release|Any CPU
-		{051EB018-F944-47C7-AB1E-4265C187373C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{051EB018-F944-47C7-AB1E-4265C187373C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{051EB018-F944-47C7-AB1E-4265C187373C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{051EB018-F944-47C7-AB1E-4265C187373C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B2D17A7-5A25-49C6-B508-2C21BA105637} = {6809AEE2-AB5F-4A1A-B453-7A8BA8F3E643}
-		{051EB018-F944-47C7-AB1E-4265C187373C} = {6809AEE2-AB5F-4A1A-B453-7A8BA8F3E643}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7394328D-98E1-4525-8770-DF6C01064028}
